@@ -29,14 +29,17 @@ class BattleShip:
 for x in range(grid_length):
     board.append(["0"] * grid_length)
 
-# ==== print board ==== #
+# ==== print board ==== # !!!
 
 def print_board(board):
-    for index, object in enumerate(board):
-        name = object.name
-        print("|".join(name))
+    for index, row in enumerate(board):
+
+        print("|".join(row))
+        
         if index != len(board)-1:
             print('-' * (len(board) * 2 - 1))
+        else:
+            None
 
 # ==== set board ==== #
 
@@ -70,13 +73,16 @@ def set_ships(board):
                 y_coord = ship_y[index]
 
                 list_of_ships[index].set_xy_coordinates(x_coord, y_coord)
+                
+                char = [list_of_ships[index].name][0]
+                # first letter of name of ship type
 
                 if orientation == True:
-                    board[y_coord][x_coord:x_coord + length] = [list_of_ships[index].name] * length
+                    board[y_coord][x_coord:x_coord + length] = char * length
 
                 else:
                     for i in range(length):
-                        board[y_coord + i][x_coord] = [list_of_ships[index].name]
+                        board[y_coord + i][x_coord] = char
 
         except IndexError:
             continue
@@ -87,7 +93,3 @@ def set_ships(board):
 
 set_ships(board)
 print_board(board)
-
-
-
-# ayo ty

@@ -32,8 +32,9 @@ for x in range(grid_length):
 # ==== print board ==== #
 
 def print_board(board):
-    for index, row in enumerate(board):
-        print("|".join(row))
+    for index, object in enumerate(board):
+        name = object.name
+        print("|".join(name))
         if index != len(board)-1:
             print('-' * (len(board) * 2 - 1))
 
@@ -41,6 +42,7 @@ def print_board(board):
 
 def set_ships(board):
 
+    while True:
     # generate random positions
     # Note: can generate ship that will extend out of bounds
     # Solution 1: catch error, try generating all ships again
@@ -48,28 +50,40 @@ def set_ships(board):
 
     # might need a while loop here !!!
 
-    ship_x = random.sample(range(10), 5) # generate x-value
-    ship_y = random.sample(range(10), 5) # generate y-value
-    
+        try:
 
-    for index, (name, length) in enumerate(ships.items()):
+            list_of_ships = []
 
-        # generate random boolean for orientation
-        # True = to the right; False = downwards
-        orientation = random.choice([True, False])
+            ship_x = random.sample(range(10), 5) # generate x-value
+            ship_y = random.sample(range(10), 5) # generate y-value
+            
 
-        BattleShip(name, length, orientation)
+            for index, (name, length) in enumerate(ships.items()):
 
-        x_coord = ship_x[index]
-        y_coord = ship_y[index]
+                # generate random boolean for orientation
+                # True = to the right; False = downwards
+                orientation = random.choice([True, False])
 
-        BattleShip.set_xy_coordinates(BattleShip, x_coord, y_coord)
+                list_of_ships.append(BattleShip(name, length, orientation))
 
-        if orientation == True:
-            board[y_coord][x_coord:x_coord + length] = [BattleShip.provide_name(BattleShip)] * length
+                x_coord = ship_x[index]
+                y_coord = ship_y[index]
 
-        else:
-            board[y_coord:y_coord + length][x_coord] = [BattleShip.provide_name(BattleShip)] * length
+                list_of_ships[index].set_xy_coordinates(x_coord, y_coord)
+
+                if orientation == True:
+                    board[y_coord][x_coord:x_coord + length] = [list_of_ships[index].name] * length
+
+                else:
+                    for i in range(length):
+                        board[y_coord + i][x_coord] = [list_of_ships[index].name]
+
+        except IndexError:
+            continue
+
+        # redoes the entire thing again if outta index; if nothing fails, breaks outta loop
+
+        break
 
 set_ships(board)
 print_board(board)

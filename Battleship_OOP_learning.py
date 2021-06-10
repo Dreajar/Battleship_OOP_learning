@@ -27,6 +27,11 @@ def print_board(board):
 
 # ==== set board ==== #
 
+# add attribute to object where it recognizes a list of x,y coordinates as its location
+# edit set_ship() such that ships don't overlap
+# write method to retrieve ship when input square
+# make it so that ships hp - 1 when square hit
+
 def set_ships():
     while True:
         try:
@@ -69,4 +74,19 @@ def set_ships():
         return board
 
 board = set_ships()
+
+# write regex expression to check input validation
+
+'''for i in range(moves):
+    x,y = map(int,input().split())
+
+    if board[y][x] ==
+
+
+
+    board[y][x] = 'X'
+'''
+
+
+
 print_board(board)

@@ -2,9 +2,8 @@ import random
 
 ships = {'carrier': 5, 'battleship': 4, 'cruiser': 3, 'submarine': 3, 'destroyer': 2}
 moves = 10
-board = []
 grid_length = 10
-
+board = []
 # ==== creating class BattleShip ==== #
 
 class BattleShip:
@@ -55,7 +54,16 @@ def set_ships(board):
 
         try:
 
+            board = [] # reset board - clears everything
+
+            for x in range(grid_length):
+                board.append(["0"] * grid_length)
+
+            # remakes 10x10 grid
+
             list_of_ships = []
+
+            # clears list of ship objects
 
             ship_x = random.sample(range(10), 5) # generate x-value
             ship_y = random.sample(range(10), 5) # generate y-value

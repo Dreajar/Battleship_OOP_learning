@@ -82,15 +82,15 @@ def set_ships(board):
 
                 list_of_ships[index].set_xy_coordinates(x_coord, y_coord)
                 
-                char = [list_of_ships[index].name][0]
+                first_letter = [list_of_ships[index].name][0]
                 # first letter of name of ship type
 
                 if orientation == True:
-                    board[y_coord][x_coord:x_coord + length] = char * length
+                    board[y_coord][x_coord:x_coord + length] = first_letter * length
 
                 else:
                     for i in range(length):
-                        board[y_coord + i][x_coord] = char
+                        board[y_coord + i][x_coord] = first_letter
 
         except IndexError:
             continue

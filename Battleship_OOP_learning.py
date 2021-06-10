@@ -73,3 +73,7 @@ def set_ships(board):
 
 set_ships(board)
 print_board(board)
+
+
+
+# ayo ty

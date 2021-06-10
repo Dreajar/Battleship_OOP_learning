@@ -20,7 +20,6 @@ class BattleShip:
 
 def print_board(board):
     for index, row in enumerate(board):
-
         print("|".join(row))
         
         if index != len(board)-1:
@@ -44,7 +43,6 @@ def set_ships():
             ship_y = random.sample(range(10), 5) # generate y-value
             
             for index, (name, length) in enumerate(ships.items()):
-
                 # generate random boolean for orientation
                 # True = to the right; False = downwards
                 orientation = random.choice([True, False])
@@ -66,12 +64,9 @@ def set_ships():
 
         except IndexError:
             continue
-
         # redoes the entire thing again if outta index; if nothing fails, breaks outta loop
 
         return board
-
-        break
 
 board = set_ships()
 print_board(board)

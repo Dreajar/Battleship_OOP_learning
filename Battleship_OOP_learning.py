@@ -20,11 +20,16 @@ class BattleShip:
     def occupied_squares(self):
         a = []
         for i in range(self.length):
+
+            # this creates list of tuples
+
             if self.orientation == True:
-                    a.append([self.y_coord, self.x_coord + i])
+                    a.append((self.y_coord, self.x_coord + i))
+
+                    # creates tuple of coords
 
             else:
-                a.append([self.y_coord + i, self.x_coord])
+                a.append((self.y_coord + i, self.x_coord))
 
         return a
                     
@@ -40,8 +45,7 @@ def print_board(board):
 
 # ==== set board ==== #
 
-# add attribute to object where it recognizes a list of x,y coordinates as its location
-# edit set_ship() such that ships don't overlap
+# edit set_ship() such that ships don't touch
 # write method to retrieve ship when input square
 # make it so that ships hp - 1 when square hit
 
@@ -76,7 +80,7 @@ def set_ships():
                 char1 = list_of_ships[index].name[0]
                 # first letter of name of ship type
 
-                all_coords.update(*list_of_ships[index].occupied_squares())
+                all_coords.update(list_of_ships[index].occupied_squares())
                 # apparently set can't absorb nested list - have to convert nested list into flat list first
 
 
@@ -92,6 +96,10 @@ def set_ships():
         except IndexError:
             continue
         # redoes the entire thing again if outta index; if nothing fails, breaks outta loop
+
+        if len(all_coords)!=sum(ships.values()):
+            continue
+        # redoes entire thing if total number of squares ships occupy != total len of ships (overlap)
 
         return board
 

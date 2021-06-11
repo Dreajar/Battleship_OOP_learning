@@ -2,6 +2,7 @@ import random
 ships = {'carrier': 5, 'battleship': 4, 'cruiser': 3, 'submarine': 3, 'destroyer': 2}
 moves = 10
 grid_length = 10
+all_coords = set()
 
 # ==== creating class BattleShip ==== #
 
@@ -15,6 +16,18 @@ class BattleShip:
     def set_xy_coordinates(self, x_coord, y_coord):
         self.x_coord = x_coord
         self.y_coord = y_coord
+
+    def occupied_squares(self):
+        a = []
+        for i in range(self.length):
+            if self.orientation == True:
+                    a.append([self.y_coord, self.x_coord + i])
+
+            else:
+                a.append([self.y_coord + i, self.x_coord])
+
+        return a
+                    
 
 # ==== print board ==== # !!!
 
@@ -32,11 +45,13 @@ def print_board(board):
 # write method to retrieve ship when input square
 # make it so that ships hp - 1 when square hit
 
+# fucking create a set with all the squares that the ships occupy. If no. of elemnt != total length, redo
+
 def set_ships():
     while True:
         try:
             board = [] # reset board - clears everything
-
+            
             for x in range(grid_length):
                 board.append(["0"] * grid_length)
             # remakes 10x10 grid
@@ -56,10 +71,17 @@ def set_ships():
 
                 list_of_ships.append(BattleShip(name, length, orientation))
                 list_of_ships[index].set_xy_coordinates(x_coord, y_coord)
+
                 
                 char1 = list_of_ships[index].name[0]
                 # first letter of name of ship type
 
+                all_coords.update(*list_of_ships[index].occupied_squares())
+                # apparently set can't absorb nested list - have to convert nested list into flat list first
+
+
+
+                # I think this can be shortened using the occupied squares def at the top
                 if orientation == True:
                     board[y_coord][x_coord:x_coord + length] = char1 * length
 
@@ -90,3 +112,5 @@ board = set_ships()
 
 
 print_board(board)
+
+print(all_coords)

@@ -3,6 +3,8 @@ ships = {'carrier': 5, 'battleship': 4, 'cruiser': 3, 'submarine': 3, 'destroyer
 moves = 10
 grid_length = 10
 all_coords = set()
+list_of_ships = []
+list_of_ship_names = []
 
 player_board = [] # reset board - clears everything
             
@@ -56,6 +58,7 @@ def set_ships():
             board = player_board
 
             list_of_ships = []
+            list_of_ship_names = []
             # clears list of ship objects
 
             ship_x = random.sample(range(10), 5) # generate x-value
@@ -71,8 +74,10 @@ def set_ships():
                 list_of_ships.append(BattleShip(name, length, orientation))
                 list_of_ships[index].set_xy_coordinates(x_coord, y_coord)
 
+                list_of_ship_names.append(BattleShip.name)
+
                 
-                char1 = list_of_ships[index].name[0]
+                char1 = list_of_ships[index].name
                 # first letter of name of ship type
 
                 all_coords.update(list_of_ships[index].occupied_squares())
@@ -102,15 +107,24 @@ board = set_ships()
 
 # write regex expression to check input validation
 
-'''for i in range(moves):
-    x,y = map(int,input().split())
+while True:
+    player_input = input()
+    x = int(player_input[0])
+    y = int(player_input[1])
 
-    if board[y][x] ==
+    if board[y][x] == '0':
+        player_board[y][x] = 'N'
+    else:
+        ship_hit = board[y][x] # this is a string value
+        index = list_of_ship_names.index(ship_hit)
+        list_of_ships[index].hp -= 1
+        player_board[y][x] = 'X'
+        pass
 
 
 
     board[y][x] = 'X'
-'''
+
 
 
 

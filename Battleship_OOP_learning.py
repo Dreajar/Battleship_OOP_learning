@@ -4,6 +4,11 @@ moves = 10
 grid_length = 10
 all_coords = set()
 
+player_board = [] # reset board - clears everything
+            
+for x in range(grid_length):
+    player_board.append(["0"] * grid_length)
+
 # ==== creating class BattleShip ==== #
 
 class BattleShip:
@@ -54,11 +59,7 @@ def print_board(board):
 def set_ships():
     while True:
         try:
-            board = [] # reset board - clears everything
-            
-            for x in range(grid_length):
-                board.append(["0"] * grid_length)
-            # remakes 10x10 grid
+            board = player_board
 
             list_of_ships = []
             # clears list of ship objects

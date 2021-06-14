@@ -50,12 +50,6 @@ def print_board(board):
 
 # ==== set board ==== #
 
-# edit set_ship() such that ships don't touch
-# write method to retrieve ship when input square
-# make it so that ships hp - 1 when square hit
-
-# fucking create a set with all the squares that the ships occupy. If no. of elemnt != total length, redo
-
 def set_ships():
     while True:
         try:
